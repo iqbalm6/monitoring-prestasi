@@ -19,10 +19,31 @@
 
     </div>
 
+    <div class="mb-3">
+
+        <label>Wali Kelas</label>
+
+        <select name="wali_kelas_id"
+                class="form-control">
+
+            <option value="">
+                -- Pilih Guru --
+            </option>
+
+            @foreach($guru as $item)
+
+                <option value="{{ $item->id }}">
+                    {{ $item->name }}
+                </option>
+
+            @endforeach
+
+        </select>
+
+    </div>
+
     <button class="btn btn-primary">
-
         Simpan
-
     </button>
 
 </form>

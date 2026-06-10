@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kelas;
+use App\Models\User;
 
 class KelasController extends Controller
 {
@@ -17,12 +18,13 @@ class KelasController extends Controller
         return view('kelas.index', compact('kelas'));
     }
 
-    
+
     public function create()
     {
-    return view('kelas.create');
-}
+    $guru = User::where('role', 'guru')->get();
 
+    return view('kelas.create', compact('guru'));
+    }
 
     public function store(Request $request)
 {
@@ -31,12 +33,13 @@ class KelasController extends Controller
     ]);
 
     Kelas::create([
-        'nama_kelas' => $request->nama_kelas
+        'nama_kelas' => $request->nama_kelas,
+        'wali_kelas_id' => $request->wali_kelas_id
     ]);
 
     return redirect()
         ->route('kelas.index')
-        ->with('success','Data berhasil ditambahkan');
+        ->with('success', 'Data berhasil ditambahkan');
 }
 
     

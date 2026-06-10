@@ -44,7 +44,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#"
+                    <a href="{{ route('guru.index') }}"
                        class="nav-link text-white">
                         Guru
                     </a>
