@@ -4,12 +4,12 @@
 
 <div class="d-flex justify-content-between mb-3">
 
-    <h2>Data Kelas</h2>
+    <h2>Data Orang Tua</h2>
 
-    <a href="{{ route('kelas.create') }}"
+    <a href="{{ route('orang-tua.create') }}"
        class="btn btn-primary">
 
-        Tambah Kelas
+        Tambah Orang Tua
 
     </a>
 
@@ -20,41 +20,34 @@
     <thead>
 
         <tr>
-    <th>No</th>
-    <th>Nama Kelas</th>
-    <th>Jurusan</th>
-    <th>Wali Kelas</th>
-    <th>Aksi</th>
-</tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Aksi</th>
+        </tr>
 
     </thead>
 
     <tbody>
 
-        @forelse($kelas as $item)
+        @forelse($orangTua as $item)
 
         <tr>
 
             <td>{{ $loop->iteration }}</td>
-
-            <td>{{ $item->nama_kelas }}</td>
-
-            <td>{{ $item->jurusan }}</td>
-
-            <td>
-                {{ $item->waliKelas->name ?? '-' }}
-            </td>
+            <td>{{ $item->name }}</td>
+            <td>{{ $item->email }}</td>
 
             <td>
 
-                <a href="{{ route('kelas.edit',$item->id) }}"
+                <a href="{{ route('orang-tua.edit',$item->id) }}"
                    class="btn btn-warning btn-sm">
 
                     Edit
 
                 </a>
 
-                <form action="{{ route('kelas.destroy',$item->id) }}"
+                <form action="{{ route('orang-tua.destroy',$item->id) }}"
                       method="POST"
                       style="display:inline">
 
@@ -80,7 +73,7 @@
             <td colspan="4"
                 class="text-center">
 
-                Belum Ada Data
+                Belum Ada Data Orang Tua
 
             </td>
 

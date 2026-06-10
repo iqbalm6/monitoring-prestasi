@@ -11,9 +11,10 @@ class Kelas extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama_kelas',
-        'wali_kelas_id'
-    ];
+    'nama_kelas',
+    'jurusan',
+    'wali_kelas_id'
+];
 
     public function waliKelas()
     {

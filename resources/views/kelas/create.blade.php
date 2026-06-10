@@ -21,6 +21,25 @@
 
     <div class="mb-3">
 
+        <label>Jurusan</label>
+
+        <select name="jurusan"
+                class="form-control">
+
+            <option value="IPA">
+                IPA
+            </option>
+
+            <option value="AG">
+                AG
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+
         <label>Wali Kelas</label>
 
         <select name="wali_kelas_id"

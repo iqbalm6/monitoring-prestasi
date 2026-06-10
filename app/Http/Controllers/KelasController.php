@@ -33,9 +33,10 @@ class KelasController extends Controller
     ]);
 
     Kelas::create([
-        'nama_kelas' => $request->nama_kelas,
-        'wali_kelas_id' => $request->wali_kelas_id
-    ]);
+    'nama_kelas' => $request->nama_kelas,
+    'jurusan' => $request->jurusan,
+    'wali_kelas_id' => $request->wali_kelas_id
+]);
 
     return redirect()
         ->route('kelas.index')

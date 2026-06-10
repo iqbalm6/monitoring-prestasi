@@ -44,6 +44,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="/tahun-ajaran"
+                       class="nav-link text-white">
+                        Tahun Ajaran
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('guru.index') }}"
                        class="nav-link text-white">
                         Guru
@@ -51,14 +58,14 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#"
+                    <a href="{{ route('orang-tua.index') }}"
                        class="nav-link text-white">
                         Orang Tua
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="#"
+                    <a href="{{ route('siswa.index') }}"
                        class="nav-link text-white">
                         Siswa
                     </a>
@@ -86,20 +93,22 @@
 
             <nav class="navbar navbar-light bg-light shadow-sm">
 
-                <div class="container-fluid">
+    <div class="container-fluid">
 
-                    <span>
-                        {{ auth()->user()->name }}
-                    </span>
+        <span>
+            {{ auth()->user()?->name ?? 'Administrator' }}
+        </span>
 
-                    <a href="/keluar"
-                       class="btn btn-danger">
-                        Logout
-                    </a>
+        <form action="/keluar" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger">
+                Logout
+            </button>
+        </form>
 
-                </div>
+    </div>
 
-            </nav>
+</nav>
 
             <div class="p-4">
 
