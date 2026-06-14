@@ -17,40 +17,72 @@
 
 <table class="table table-bordered">
 
-    <tr>
+    <thead>
+<tr>
+    <th>No</th>
+    <th>Tahun</th>
+    <th>Status</th>
+    <th>Aksi</th>
+</tr>
+</thead>
 
-        <th>No</th>
-        <th>Tahun</th>
-        <th>Status</th>
+<tbody>
 
-    </tr>
+@foreach($data as $item)
 
-    @foreach($data as $item)
+<tr>
 
-    <tr>
+    <td>{{ $loop->iteration }}</td>
 
-        <td>{{ $loop->iteration }}</td>
+    <td>{{ $item->tahun }}</td>
 
-        <td>{{ $item->tahun }}</td>
+    <td>
 
-        <td>
+        @if($item->aktif)
 
-            @if($item->aktif)
-
+            <span class="badge bg-success">
                 Aktif
+            </span>
 
-            @else
+        @else
 
+            <span class="badge bg-secondary">
                 Tidak Aktif
+            </span>
 
-            @endif
+        @endif
 
-        </td>
+    </td>
 
-    </tr>
+    <td>
 
-    @endforeach
+        <a href="{{ route('tahun-ajaran.edit',$item->id) }}"
+           class="btn btn-warning">
+            Edit
+        </a>
 
-</table>
+        <form action="{{ route('tahun-ajaran.destroy',$item->id) }}"
+              method="POST"
+              style="display:inline">
+
+            @csrf
+            @method('DELETE')
+
+            <button class="btn btn-danger"
+                    onclick="return confirm('Hapus data?')">
+
+                Hapus
+
+            </button>
+
+        </form>
+
+    </td>
+
+</tr>
+
+@endforeach
+
+</tbody>
 
 @endsection

@@ -7,9 +7,7 @@ use App\Models\TahunAjaran;
 
 class TahunAjaranController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $data = TahunAjaran::all();
@@ -20,51 +18,86 @@ class TahunAjaranController extends Controller
     );
     }   
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create()
     {
-        //
+    return view('tahun_ajaran.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
-    {
-        //
+{
+    $request->validate([
+        'tahun' => 'required'
+    ]);
+
+    if ($request->aktif == 1) {
+
+        TahunAjaran::query()
+            ->update([
+                'aktif' => 0
+            ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
+    TahunAjaran::create([
+        'tahun' => $request->tahun,
+        'aktif' => $request->aktif,
+    ]);
+
+    return redirect()
+        ->route('tahun-ajaran.index');
+}
+
+    
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(string $id)
     {
-        //
+        $tahunAjaran = TahunAjaran::findOrFail($id);
+
+        return view(
+            'tahun_ajaran.edit',
+            compact('tahunAjaran')
+        );
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    
+        public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'tahun' => 'required'
+        ]);
+
+        if ($request->aktif == 1) {
+
+            TahunAjaran::query()
+                ->update([
+                    'aktif' => 0
+                ]);
+        }
+
+        $tahunAjaran = TahunAjaran::findOrFail($id);
+
+        $tahunAjaran->update([
+            'tahun' => $request->tahun,
+            'aktif' => $request->aktif
+        ]);
+
+        return redirect()
+            ->route('tahun-ajaran.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(string $id)
-    {
-        //
-    }
+{
+    TahunAjaran::findOrFail($id)
+        ->delete();
+
+    return redirect()
+        ->route('tahun-ajaran.index');
+}
 }

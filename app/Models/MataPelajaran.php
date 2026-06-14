@@ -12,4 +12,12 @@ class MataPelajaran extends Model
         'nama_mapel',
         'jurusan'
     ];
+
+    public function prestasiAkademik()
+    {
+        return $this->hasMany(
+            PrestasiAkademik::class,
+            'mata_pelajaran_id'
+        );
+    }
 }

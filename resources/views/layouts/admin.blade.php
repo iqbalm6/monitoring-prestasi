@@ -72,8 +72,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#"
-                       class="nav-link text-white">
+                    <a href="{{ route('prestasi-akademik.index') }}"
+                    class="nav-link text-white">
                         Prestasi Akademik
                     </a>
                 </li>
@@ -84,6 +84,13 @@
                         Prestasi Non Akademik
                     </a>
                 </li>
+
+                <li class="nav-item">
+                     <a href="{{ route('mata-pelajaran.index') }}"
+                          class="nav-link text-white">
+                          Mata Pelajaran
+                     </a>
+                </li>   
 
             </ul>
 

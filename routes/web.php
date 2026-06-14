@@ -8,6 +8,8 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\OrangTuaController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TahunAjaranController;
+use App\Http\Controllers\MataPelajaranController;
+use App\Http\Controllers\PrestasiAkademikController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -40,6 +42,18 @@ Route::middleware(['auth'])
 
 Route::middleware(['auth'])
     ->resource('tahun-ajaran', TahunAjaranController::class);
+
+Route::middleware(['auth'])
+    ->resource('mata-pelajaran', MataPelajaranController::class);
+
+Route::post(
+    '/prestasi-akademik/tampilkan-mapel',
+    [PrestasiAkademikController::class,'tampilkanMapel']
+)->name('prestasi-akademik.tampilkan-mapel');
+
+Route::middleware(['auth'])
+    ->resource('prestasi-akademik', PrestasiAkademikController::class);
+
 
 Route::post('/keluar', function () {
 

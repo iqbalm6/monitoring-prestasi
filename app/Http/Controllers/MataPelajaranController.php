@@ -2,63 +2,90 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MataPelajaran;
 use Illuminate\Http\Request;
 
 class MataPelajaranController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
-    {
-        //
-    }
+{
+    $data = MataPelajaran::orderBy('jurusan')
+                ->orderBy('nama_mapel')
+                ->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    return view(
+        'mata_pelajaran.index',
+        compact('data')
+    );
+}
+
+    
     public function create()
     {
-        //
+        return view('mata_pelajaran.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
-    {
-        //
-    }
+{
+    $request->validate([
+        'nama_mapel' => 'required',
+        'jurusan' => 'required'
+    ]);
 
-    /**
-     * Display the specified resource.
-     */
+    MataPelajaran::create([
+        'nama_mapel' => $request->nama_mapel,
+        'jurusan' => $request->jurusan
+    ]);
+
+    return redirect()
+        ->route('mata-pelajaran.index');
+}
+
+    
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(string $id)
-    {
-        //
-    }
+{
+    $mataPelajaran = MataPelajaran::findOrFail($id);
 
-    /**
-     * Update the specified resource in storage.
-     */
+    return view(
+        'mata_pelajaran.edit',
+        compact('mataPelajaran')
+    );
+}
+
+    
     public function update(Request $request, string $id)
-    {
-        //
-    }
+{
+    $request->validate([
+        'nama_mapel' => 'required',
+        'jurusan' => 'required'
+    ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    $mataPelajaran = MataPelajaran::findOrFail($id);
+
+    $mataPelajaran->update([
+        'nama_mapel' => $request->nama_mapel,
+        'jurusan' => $request->jurusan
+    ]);
+
+    return redirect()
+        ->route('mata-pelajaran.index');
+}
+
+    
     public function destroy(string $id)
-    {
-        //
-    }
+{
+    MataPelajaran::findOrFail($id)
+        ->delete();
+
+    return redirect()
+        ->route('mata-pelajaran.index');
+}
 }
