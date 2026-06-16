@@ -102,19 +102,43 @@ class PrestasiAkademikController extends Controller
 
     
     public function edit(string $id)
-    {
-        //
-    }
+{
+    $prestasi = PrestasiAkademik::with([
+        'siswa',
+        'mataPelajaran',
+        'tahunAjaran'
+    ])->findOrFail($id);
+
+    return view(
+        'prestasi_akademik.edit',
+        compact('prestasi')
+    );
+}
 
     
     public function update(Request $request, string $id)
-    {
-        //
-    }
+{
+    $request->validate([
+        'nilai' => 'required|numeric|min:0|max:100'
+    ]);
+
+    $prestasi = PrestasiAkademik::findOrFail($id);
+
+    $prestasi->update([
+        'nilai' => $request->nilai
+    ]);
+
+    return redirect()
+        ->route('prestasi-akademik.index');
+}
 
     
     public function destroy(string $id)
-    {
-        //
-    }
+{
+    PrestasiAkademik::findOrFail($id)
+        ->delete();
+
+    return redirect()
+        ->route('prestasi-akademik.index');
+}
 }

@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
 {
     Schema::create('prestasi_non_akademik', function (Blueprint $table) {
@@ -19,26 +17,25 @@ return new class extends Migration
               ->constrained('siswa')
               ->cascadeOnDelete();
 
-        $table->string('nama_kegiatan');
+        $table->foreignId('tahun_ajaran_id')
+              ->constrained('tahun_ajaran')
+              ->cascadeOnDelete();
+
+        $table->string('nama_prestasi');
 
         $table->string('tingkat');
 
-        $table->string('juara');
+        $table->string('peringkat');
 
         $table->date('tanggal');
 
-        $table->string('sertifikat')
+        $table->string('bukti')
+              ->nullable();
+
+        $table->text('keterangan')
               ->nullable();
 
         $table->timestamps();
     });
 }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('prestasi_non_akademik');
-    }
 };

@@ -67,8 +67,9 @@
                 </a>
 
                 <form action="{{ route('prestasi-akademik.destroy',$item->id) }}"
-                      method="POST"
-                      style="display:inline">
+      method="POST"
+      style="display:inline"
+      onsubmit="return confirm('Anda yakin ingin menghapus nilai ini?')">
 
                     @csrf
                     @method('DELETE')

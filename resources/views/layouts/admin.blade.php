@@ -79,7 +79,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#"
+                    <a href="{{route('prestasi-non-akademik.index')}}"
                        class="nav-link text-white">
                         Prestasi Non Akademik
                     </a>

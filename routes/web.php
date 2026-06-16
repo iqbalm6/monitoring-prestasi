@@ -10,6 +10,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\PrestasiAkademikController;
+use App\Http\Controllers\PrestasiNonAkademikController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -53,6 +54,9 @@ Route::post(
 
 Route::middleware(['auth'])
     ->resource('prestasi-akademik', PrestasiAkademikController::class);
+
+Route::middleware(['auth'])
+    ->resource('prestasi-non-akademik', PrestasiNonAkademikController::class);
 
 
 Route::post('/keluar', function () {
