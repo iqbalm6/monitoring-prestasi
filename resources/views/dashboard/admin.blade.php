@@ -122,4 +122,60 @@
 
 </div>
 
+<hr class="my-4">
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h5 class="mb-0">
+            Top 5 Siswa Akademik
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-bordered">
+
+            <thead>
+
+                <tr>
+                    <th>Ranking</th>
+                    <th>Nama Siswa</th>
+                    <th>Rata-rata Nilai</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @foreach($topAkademik as $item)
+
+                <tr>
+
+                    <td>
+                        {{ $loop->iteration }}
+                    </td>
+
+                    <td>
+                        {{ $item->siswa->nama }}
+                    </td>
+
+                    <td>
+                        {{ number_format($item->rata_rata,2) }}
+                    </td>
+
+                </tr>
+
+                @endforeach
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
 @endsection

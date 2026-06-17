@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\PrestasiAkademik;
+use App\Models\PrestasiNonAkademik;
 
 class Siswa extends Model
 {
@@ -25,5 +27,17 @@ class Siswa extends Model
     public function orangTua()
     {
         return $this->belongsTo(User::class, 'orang_tua_id');
+    }
+
+    public function prestasiAkademik()
+    {
+        return $this->hasMany(PrestasiAkademik::class);
+    }
+
+    public function prestasiNonAkademik()
+    {
+    return $this->hasMany(
+        PrestasiNonAkademik::class
+    );
     }
 }

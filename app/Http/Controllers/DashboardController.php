@@ -11,7 +11,7 @@ use App\Models\PrestasiNonAkademik;
 
 class DashboardController extends Controller
 {
-        public function index()
+    public function index()
     {
         $role = auth()->user()->role;
 
@@ -24,12 +24,27 @@ class DashboardController extends Controller
                 'guru'
             )->count();
 
-            $totalOrangTua = User::where(
-                'role',
-                'orang_tua'
-            )->count();
-
             $totalKelas = Kelas::count();
+
+            $totalPrestasi =
+                PrestasiAkademik::count()
+                +
+                PrestasiNonAkademik::count();
+            
+            $topAkademik =
+                PrestasiAkademik::selectRaw(
+                    'siswa_id, AVG(nilai) as rata_nilai'
+                )
+                ->with('siswa')
+                ->groupBy('siswa_id')
+                ->orderByDesc('rata_nilai')
+                ->take(5)
+                ->get();
+            
+            $totalOrangTua = User::where(
+                    'role',
+                    'orang_tua'
+                )->count();
 
             $totalPrestasiAkademik =
                 PrestasiAkademik::count();
@@ -45,16 +60,67 @@ class DashboardController extends Controller
                     'totalOrangTua',
                     'totalKelas',
                     'totalPrestasiAkademik',
-                    'totalPrestasiNonAkademik'
+                    'totalPrestasiNonAkademik',
+                    'topAkademik'
                 )
             );
         }
 
-        if ($role == 'guru')
+                if ($role == 'guru')
         {
-            return view('dashboard.guru');
+            $totalSiswa = Siswa::count();
+
+            $totalKelas = Kelas::count();
+
+            $totalPrestasiAkademik =
+                PrestasiAkademik::count();
+
+            $totalPrestasiNonAkademik =
+                PrestasiNonAkademik::count();
+
+            $nilaiTerbaru =
+                PrestasiAkademik::with([
+                    'siswa',
+                    'mataPelajaran'
+                ])
+                ->latest()
+                ->take(5)
+                ->get();
+
+            $prestasiTerbaru =
+                PrestasiNonAkademik::with(
+                    'siswa'
+                )
+                ->latest()
+                ->take(5)
+                ->get();
+
+            return view(
+                'dashboard.guru',
+                compact(
+                    'totalSiswa',
+                    'totalKelas',
+                    'totalPrestasiAkademik',
+                    'totalPrestasiNonAkademik',
+                    'nilaiTerbaru',
+                    'prestasiTerbaru'
+                )
+            );
         }
 
-        return view('dashboard.orangtua');
+        $anak = auth()->user()
+    ->siswa()
+    ->with([
+        'kelas',
+        'prestasiAkademik.mataPelajaran',
+        'prestasiAkademik.tahunAjaran',
+        'prestasiNonAkademik'
+    ])
+    ->get();
+
+        return view(
+            'dashboard.orangtua',
+            compact('anak')
+        );
     }
-}
+} 

@@ -86,6 +86,17 @@
                 </li>
 
                 <li class="nav-item">
+
+                    <a href="{{ route('laporan-prestasi.index') }}"
+                        class="nav-link text-white">
+
+                        Laporan Prestasi
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
                      <a href="{{ route('mata-pelajaran.index') }}"
                           class="nav-link text-white">
                           Mata Pelajaran

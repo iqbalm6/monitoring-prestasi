@@ -11,6 +11,7 @@ use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\PrestasiAkademikController;
 use App\Http\Controllers\PrestasiNonAkademikController;
+use App\Http\Controllers\LaporanPrestasiController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -47,10 +48,9 @@ Route::middleware(['auth'])
 Route::middleware(['auth'])
     ->resource('mata-pelajaran', MataPelajaranController::class);
 
-Route::post(
-    '/prestasi-akademik/tampilkan-mapel',
-    [PrestasiAkademikController::class,'tampilkanMapel']
-)->name('prestasi-akademik.tampilkan-mapel');
+Route::middleware(['auth'])
+    ->post('/prestasi-akademik/tampilkan-mapel',[PrestasiAkademikController::class,'tampilkanMapel'])
+    ->name('prestasi-akademik.tampilkan-mapel');
 
 Route::middleware(['auth'])
     ->resource('prestasi-akademik', PrestasiAkademikController::class);
@@ -58,6 +58,17 @@ Route::middleware(['auth'])
 Route::middleware(['auth'])
     ->resource('prestasi-non-akademik', PrestasiNonAkademikController::class);
 
+Route::middleware(['auth'])
+    ->get('/laporan-prestasi',[LaporanPrestasiController::class,'index'])
+    ->name('laporan-prestasi.index');
+
+Route::middleware(['auth'])
+    ->post('/laporan-prestasi',[LaporanPrestasiController::class,'tampilkan'])
+    ->name('laporan-prestasi.tampilkan');
+
+Route::middleware(['auth'])
+    ->get('/laporan-prestasi/pdf/{siswa}/{tahun}',[LaporanPrestasiController::class,'pdf'])
+    ->name('laporan-prestasi.pdf');
 
 Route::post('/keluar', function () {
 
