@@ -16,7 +16,9 @@
 
                 <h6>Total Siswa</h6>
 
-                <h2>{{ $totalSiswa }}</h2>
+                <h2>
+                    {{ $totalSiswa }}
+                </h2>
 
             </div>
 
@@ -32,7 +34,9 @@
 
                 <h6>Total Guru</h6>
 
-                <h2>{{ $totalGuru }}</h2>
+                <h2>
+                    {{ $totalGuru }}
+                </h2>
 
             </div>
 
@@ -48,7 +52,9 @@
 
                 <h6>Total Orang Tua</h6>
 
-                <h2>{{ $totalOrangTua }}</h2>
+                <h2>
+                    {{ $totalOrangTua }}
+                </h2>
 
             </div>
 
@@ -68,7 +74,9 @@
 
                 <h6>Total Kelas</h6>
 
-                <h2>{{ $totalKelas }}</h2>
+                <h2>
+                    {{ $totalKelas }}
+                </h2>
 
             </div>
 
@@ -84,7 +92,9 @@
 
                 <h6>Prestasi Akademik</h6>
 
-                <h2>{{ $totalPrestasiAkademik }}</h2>
+                <h2>
+                    {{ $totalPrestasiAkademik }}
+                </h2>
 
             </div>
 
@@ -100,7 +110,9 @@
 
                 <h6>Prestasi Non Akademik</h6>
 
-                <h2>{{ $totalPrestasiNonAkademik }}</h2>
+                <h2>
+                    {{ $totalPrestasiNonAkademik }}
+                </h2>
 
             </div>
 
@@ -112,7 +124,7 @@
 
 <hr class="my-4">
 
-<div class="card shadow-sm">
+<div class="card">
 
     <div class="card-header">
 
@@ -170,14 +182,12 @@
 
 <div class="row">
 
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6">
 
         <div class="card shadow-sm">
 
             <div class="card-header">
-
                 Grafik Rata-rata Nilai Siswa
-
             </div>
 
             <div class="card-body">
@@ -190,14 +200,12 @@
 
     </div>
 
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6">
 
         <div class="card shadow-sm">
 
             <div class="card-header">
-
                 Grafik Prestasi Non Akademik
-
             </div>
 
             <div class="card-body">
@@ -232,15 +240,6 @@ new Chart(
                     @endforeach
                 ]
             }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100
-                }
-            }
         }
     }
 );
@@ -263,14 +262,6 @@ new Chart(
                     @endforeach
                 ]
             }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
         }
     }
 );
