@@ -1,58 +1,265 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Student Achievement Monitoring Information System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Overview
 
-## About Laravel
+The Student Achievement Monitoring Information System is a web-based application developed to support schools in managing, monitoring, and evaluating student achievements in both academic and non-academic fields.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This system was developed as part of a bachelor's thesis project at Universitas Almuslim and is implemented using the Laravel Framework.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The application provides integrated management of students, teachers, parents, academic records, non-academic achievements, reports, and statistical dashboards.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Thesis Title
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Design and Development of a Student Achievement Monitoring Information System at Madrasah Aliyah Ruhul Islam Anak Bangsa, Gue Gajah, Aceh Besar**
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Objectives
 
-## Agentic Development
+* Facilitate student achievement monitoring.
+* Improve academic and non-academic record management.
+* Support decision-making processes within the school.
+* Provide real-time achievement information for teachers and parents.
+* Generate comprehensive achievement reports.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
+
+## Key Features
+
+### Authentication & Authorization
+
+* Secure Login System
+* Role-Based Access Control
+
+  * Administrator
+  * Teacher
+  * Parent
+
+### Master Data Management
+
+* Student Management
+* Teacher Management
+* Parent Management
+* Class Management
+* Subject Management
+* Academic Year Management
+
+### Academic Achievement Module
+
+* Academic Achievement Records
+* Subject-Based Performance Tracking
+* Student Academic Reports
+
+### Non-Academic Achievement Module
+
+* Competition Records
+* Achievement Categories
+* Achievement Levels
+* Achievement Documentation
+
+### Dashboard & Analytics
+
+* Student Statistics
+* Academic Achievement Statistics
+* Non-Academic Achievement Statistics
+* Achievement Monitoring Charts
+
+### Reporting
+
+* Student Achievement Reports
+* PDF Export
+* Performance Monitoring Reports
+
+---
+
+## System Users
+
+### Administrator
+
+* Manage all system data
+* Manage users and permissions
+* Manage student achievements
+* Access reports and analytics
+
+### Teacher
+
+* Input student achievement data
+* View achievement reports
+* Monitor student progress
+
+### Parent
+
+* View their child's achievement information
+* Monitor academic and non-academic development
+
+---
+
+## Technology Stack
+
+### Backend
+
+* PHP 8+
+* Laravel 12
+
+### Frontend
+
+* Blade Template Engine
+* Bootstrap 5
+* JavaScript
+
+### Database
+
+* MySQL
+
+### Development Tools
+
+* Git
+* GitHub
+* Composer
+* Vite
+
+---
+
+## Implemented Modules
+
+* Dashboard
+* User Management
+* Teacher Management
+* Parent Management
+* Student Management
+* Class Management
+* Subject Management
+* Academic Year Management
+* Academic Achievement Management
+* Non-Academic Achievement Management
+* Statistical Reports
+* PDF Report Generation
+
+---
+
+## Installation
+
+Clone the repository:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/iqbalm6/monitoring-prestasi.git
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Navigate to the project directory:
 
-## Contributing
+```bash
+cd monitoring-prestasi
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Install dependencies:
 
-## Code of Conduct
+```bash
+composer install
+npm install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Copy the environment file:
 
-## Security Vulnerabilities
+```bash
+cp .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Generate application key:
+
+```bash
+php artisan key:generate
+```
+
+Configure your database settings in the `.env` file.
+
+Run migrations and seeders:
+
+```bash
+php artisan migrate --seed
+```
+
+Start the development server:
+
+```bash
+php artisan serve
+```
+
+---
+
+## Project Structure
+
+```text
+app/
+├── Http/Controllers
+├── Models
+
+database/
+├── migrations
+├── seeders
+
+resources/
+├── views
+├── css
+├── js
+
+routes/
+└── web.php
+```
+
+---
+
+## Development History
+
+### v0.5-master-data-akademik
+
+* Student Management
+* Teacher Management
+* Parent Management
+* Class Management
+* Subject Management
+* Academic Year Management
+* Academic Achievement Module
+
+### v0.6-dashboard-statistik
+
+* Dashboard Statistics
+* Non-Academic Achievement Module
+* Achievement Analytics
+
+### Current Version
+
+* Teacher Dashboard
+* Student Achievement Reports
+* PDF Export Feature
+* Achievement Statistics Charts
+
+---
+
+## Future Enhancements
+
+* Mobile Application Integration
+* Achievement Recommendation System
+* Decision Support Features
+* Notification System
+* Achievement Ranking System
+* Parent Mobile Access
+
+---
+
+## Author
+
+**Muhammad Iqbal**
+
+Bachelor Thesis Project
+
+Department of Informatics Engineering
+
+Universitas Almuslim
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project was developed for academic and research purposes.
