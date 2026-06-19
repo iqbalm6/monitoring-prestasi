@@ -2,94 +2,148 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between mb-3">
+<div class="dashboard-hero">
 
     <h2>Data Kelas</h2>
 
-    <a href="{{ route('kelas.create') }}"
-       class="btn btn-primary">
-
-        Tambah Kelas
-
-    </a>
+    <p class="mb-0">
+        Kelola seluruh data kelas siswa
+    </p>
 
 </div>
 
-<table class="table table-bordered">
+<div class="card mb-4">
 
-    <thead>
+    <div class="card-body d-flex justify-content-between align-items-center">
 
-        <tr>
-    <th>No</th>
-    <th>Nama Kelas</th>
-    <th>Jurusan</th>
-    <th>Wali Kelas</th>
-    <th>Aksi</th>
-</tr>
+        <div>
 
-    </thead>
+            <h5 class="mb-1">
+                Daftar Kelas
+            </h5>
 
-    <tbody>
+            <small class="text-muted">
+                Data kelas yang terdaftar pada sistem
+            </small>
 
-        @forelse($kelas as $item)
+        </div>
 
-        <tr>
+        <a href="{{ route('kelas.create') }}"
+           class="btn btn-success">
 
-            <td>{{ $loop->iteration }}</td>
+            + Tambah Kelas
 
-            <td>{{ $item->nama_kelas }}</td>
+        </a>
 
-            <td>{{ $item->jurusan }}</td>
+    </div>
 
-            <td>
-                {{ $item->waliKelas->name ?? '-' }}
-            </td>
+</div>
 
-            <td>
+<div class="card">
 
-                <a href="{{ route('kelas.edit',$item->id) }}"
-                   class="btn btn-warning btn-sm">
+    <div class="card-header">
 
-                    Edit
+        Data Kelas
 
-                </a>
+    </div>
 
-                <form action="{{ route('kelas.destroy',$item->id) }}"
-                      method="POST"
-                      style="display:inline">
+    <div class="card-body">
 
-                    @csrf
-                    @method('DELETE')
+        <div class="table-responsive">
 
-                    <button class="btn btn-danger btn-sm">
+            <table class="table table-hover align-middle">
 
-                        Hapus
+                <thead class="table-success">
 
-                    </button>
+                    <tr>
 
-                </form>
+                        <th width="80">No</th>
+                        <th>Nama Kelas</th>
+                        <th>Jurusan</th>
+                        <th>Wali Kelas</th>
+                        <th width="180">Aksi</th>
 
-            </td>
+                    </tr>
 
-        </tr>
+                </thead>
 
-        @empty
+                <tbody>
 
-        <tr>
+                    @forelse($kelas as $item)
 
-            <td colspan="4"
-                class="text-center">
+                    <tr>
 
-                Belum Ada Data
+                        <td>
+                            {{ $loop->iteration }}
+                        </td>
 
-            </td>
+                        <td>
+                            {{ $item->nama_kelas }}
+                        </td>
 
-        </tr>
+                        <td>
+                            {{ $item->jurusan }}
+                        </td>
 
-        @endforelse
+                        <td>
+                            {{ $item->waliKelas->name ?? '-' }}
+                        </td>
 
-    </tbody>
+                        <td>
 
-</table>
+                            <a href="{{ route('kelas.edit',$item->id) }}"
+                               class="btn btn-warning btn-sm">
+
+                                Edit
+
+                            </a>
+
+                            <form
+                                action="{{ route('kelas.destroy',$item->id) }}"
+                                method="POST"
+                                class="d-inline"
+                            >
+
+                                @csrf
+                                @method('DELETE')
+
+                                <button
+                                    class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Yakin ingin menghapus data ini?')"
+                                >
+
+                                    Hapus
+
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                    @empty
+
+                    <tr>
+
+                        <td colspan="5" class="text-center">
+
+                            Belum ada data kelas
+
+                        </td>
+
+                    </tr>
+
+                    @endforelse
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
 
 @endsection

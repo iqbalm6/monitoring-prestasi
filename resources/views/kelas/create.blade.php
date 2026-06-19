@@ -2,69 +2,129 @@
 
 @section('content')
 
-<h2>Tambah Kelas</h2>
+<div class="dashboard-hero">
 
-<form action="{{ route('kelas.store') }}"
-      method="POST">
+    <h2>Tambah Kelas</h2>
 
-    @csrf
+    <p class="mb-0">
+        Tambahkan data kelas baru
+    </p>
 
-    <div class="mb-3">
+</div>
 
-        <label>Nama Kelas</label>
+<div class="card">
 
-        <input type="text"
-               name="nama_kelas"
-               class="form-control">
+    <div class="card-header">
 
-    </div>
-
-    <div class="mb-3">
-
-        <label>Jurusan</label>
-
-        <select name="jurusan"
-                class="form-control">
-
-            <option value="IPA">
-                IPA
-            </option>
-
-            <option value="AG">
-                AG
-            </option>
-
-        </select>
+        Form Tambah Kelas
 
     </div>
 
-    <div class="mb-3">
+    <div class="card-body">
 
-        <label>Wali Kelas</label>
+        <form
+            action="{{ route('kelas.store') }}"
+            method="POST"
+        >
 
-        <select name="wali_kelas_id"
-                class="form-control">
+            @csrf
 
-            <option value="">
-                -- Pilih Guru --
-            </option>
+            <div class="mb-3">
 
-            @foreach($guru as $item)
+                <label class="form-label">
 
-                <option value="{{ $item->id }}">
-                    {{ $item->name }}
-                </option>
+                    Nama Kelas
 
-            @endforeach
+                </label>
 
-        </select>
+                <input
+                    type="text"
+                    name="nama_kelas"
+                    class="form-control"
+                    required
+                >
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+
+                    Jurusan
+
+                </label>
+
+                <select
+                    name="jurusan"
+                    class="form-control"
+                >
+
+                    <option value="IPA">
+
+                        IPA
+
+                    </option>
+
+                    <option value="AG">
+
+                        AG
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Wali Kelas
+
+                </label>
+
+                <select
+                    name="wali_kelas_id"
+                    class="form-control"
+                >
+
+                    <option value="">
+
+                        -- Pilih Guru --
+
+                    </option>
+
+                    @foreach($guru as $item)
+
+                    <option value="{{ $item->id }}">
+
+                        {{ $item->name }}
+
+                    </option>
+
+                    @endforeach
+
+                </select>
+
+            </div>
+
+            <a href="{{ route('kelas.index') }}"
+               class="btn btn-secondary">
+
+                Kembali
+
+            </a>
+
+            <button class="btn btn-success">
+
+                Simpan
+
+            </button>
+
+        </form>
 
     </div>
 
-    <button class="btn btn-primary">
-        Simpan
-    </button>
-
-</form>
+</div>
 
 @endsection

@@ -52,6 +52,7 @@ class KelasController extends Controller
     
     public function edit(Kelas $kelas)
 {
+    $guru = User::where('role', 'guru')->get();
     return view('kelas.edit', compact('kelas'));
 }
 

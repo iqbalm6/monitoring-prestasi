@@ -70,14 +70,19 @@ Route::middleware(['auth'])
     ->get('/laporan-prestasi/pdf/{siswa}/{tahun}',[LaporanPrestasiController::class,'pdf'])
     ->name('laporan-prestasi.pdf');
 
+Route::get('/logout-success', function () {
+    return view('auth.logout');
+})->name('logout.success');
+
 Route::post('/keluar', function () {
 
     Auth::logout();
 
     request()->session()->invalidate();
+
     request()->session()->regenerateToken();
 
-    return redirect('/');
+    return redirect()->route('logout.success');
 
 })->middleware('auth');
 require __DIR__.'/auth.php';

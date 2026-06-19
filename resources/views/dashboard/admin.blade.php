@@ -2,15 +2,24 @@
 
 @section('content')
 
-<h2 class="mb-4">
-    Dashboard Admin
-</h2>
+<div class="dashboard-hero">
+
+    <h2>
+        Dashboard Monitoring Prestasi
+    </h2>
+
+    <p class="mb-0">
+        Sistem Informasi Monitoring Prestasi Siswa
+        MA Ruhul Islam Anak Bangsa
+    </p>
+
+</div>
 
 <div class="row">
 
     <div class="col-md-4 mb-3">
 
-        <div class="card shadow-sm border-0">
+        <div class="card stat-card">
 
             <div class="card-body">
 
