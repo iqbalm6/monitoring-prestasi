@@ -250,15 +250,7 @@ routes/
 
 ## Author
 
-**Muhammad Iqbal**
-
-Bachelor Thesis Project
-
-Department of Informatics Engineering
-
-Universitas Almuslim
-
----
+**IQBAL MULYANA**
 
 ## License
 
