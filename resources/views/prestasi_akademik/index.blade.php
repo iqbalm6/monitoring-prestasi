@@ -2,92 +2,98 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between mb-3">
+<div class="card shadow-sm border-0">
 
-    <h2>Prestasi Akademik</h2>
+    <div class="card-header bg-white d-flex justify-content-between align-items-center">
 
-    <a href="{{ route('prestasi-akademik.create') }}"
-       class="btn btn-primary">
+        <h4 class="mb-0 fw-bold text-success">
+            Prestasi Akademik
+        </h4>
 
-        Tambah Nilai
+        <a href="{{ route('prestasi-akademik.pilih-kelas') }}"
+           class="btn btn-primary">
 
-    </a>
+            Tambah Nilai
+
+        </a>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-hover">
+
+            <thead class="table-light">
+
+                <tr>
+
+                    <th>No</th>
+                    <th>Kelas</th>
+                    <th>Jurusan</th>
+                    <th>Jumlah Siswa</th>
+                    <th width="150">
+                        Aksi
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @forelse($kelas as $item)
+
+                <tr>
+
+                    <td>
+                        {{ $loop->iteration }}
+                    </td>
+
+                    <td>
+                        {{ $item->nama_kelas }}
+                    </td>
+
+                    <td>
+                        {{ $item->jurusan }}
+                    </td>
+
+                    <td>
+                        {{ $item->siswa_count }}
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{{ route('prestasi-akademik.pilih-siswa',$item->id) }}"
+                            class="btn btn-success btn-sm"
+                        >
+                            Lihat Siswa
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                @empty
+
+                <tr>
+
+                    <td colspan="5" class="text-center">
+
+                        Belum ada data kelas
+
+                    </td>
+
+                </tr>
+
+                @endforelse
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>
-
-<table class="table table-bordered">
-
-    <thead>
-
-        <tr>
-            <th>No</th>
-            <th>Siswa</th>
-            <th>Mata Pelajaran</th>
-            <th>Tahun Ajaran</th>
-            <th>Semester</th>
-            <th>Nilai</th>
-            <th>Aksi</th>
-        </tr>
-
-    </thead>
-
-    <tbody>
-
-        @foreach($data as $item)
-
-        <tr>
-
-            <td>{{ $loop->iteration }}</td>
-
-            <td>
-                {{ $item->siswa->nama }}
-            </td>
-
-            <td>
-                {{ $item->mataPelajaran->nama_mapel }}
-            </td>
-
-            <td>
-                {{ $item->tahunAjaran->tahun }}
-            </td>
-
-            <td>
-                {{ $item->semester }}
-            </td>
-
-            <td>
-                {{ $item->nilai }}
-            </td>
-
-            <td>
-
-                <a href="{{ route('prestasi-akademik.edit',$item->id) }}"
-                   class="btn btn-warning btn-sm">
-                    Edit
-                </a>
-
-                <form action="{{ route('prestasi-akademik.destroy',$item->id) }}"
-      method="POST"
-      style="display:inline"
-      onsubmit="return confirm('Anda yakin ingin menghapus nilai ini?')">
-
-                    @csrf
-                    @method('DELETE')
-
-                    <button class="btn btn-danger btn-sm">
-                        Hapus
-                    </button>
-
-                </form>
-
-            </td>
-
-        </tr>
-
-        @endforeach
-
-    </tbody>
-
-</table>
 
 @endsection

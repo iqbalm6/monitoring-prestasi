@@ -2,11 +2,11 @@
 
 ## Overview
 
-The Student Achievement Monitoring Information System is a web-based application developed to support schools in managing, monitoring, and evaluating student achievements in both academic and non-academic fields.
+The Student Achievement Monitoring Information System is a web-based application designed to assist schools in managing, monitoring, and evaluating student achievements in both academic and non-academic fields.
 
-This system was developed as part of a bachelor's thesis project at Universitas Almuslim and is implemented using the Laravel Framework.
+The system was developed as part of a bachelor's thesis project at STIMIK AMIKI and implemented using the Laravel Framework.
 
-The application provides integrated management of students, teachers, parents, academic records, non-academic achievements, reports, and statistical dashboards.
+It provides centralized management for students, teachers, parents, classes, subjects, academic records, non-academic achievements, reports, and performance monitoring dashboards.
 
 ---
 
@@ -19,75 +19,33 @@ The application provides integrated management of students, teachers, parents, a
 ## Objectives
 
 * Facilitate student achievement monitoring.
-* Improve academic and non-academic record management.
-* Support decision-making processes within the school.
-* Provide real-time achievement information for teachers and parents.
-* Generate comprehensive achievement reports.
+* Improve management of academic and non-academic achievements.
+* Support school decision-making processes.
+* Provide integrated student performance information.
+* Generate achievement reports automatically.
+* Improve communication between school administrators, teachers, and parents.
 
 ---
 
-## Key Features
-
-### Authentication & Authorization
-
-* Secure Login System
-* Role-Based Access Control
-
-  * Administrator
-  * Teacher
-  * Parent
-
-### Master Data Management
-
-* Student Management
-* Teacher Management
-* Parent Management
-* Class Management
-* Subject Management
-* Academic Year Management
-
-### Academic Achievement Module
-
-* Academic Achievement Records
-* Subject-Based Performance Tracking
-* Student Academic Reports
-
-### Non-Academic Achievement Module
-
-* Competition Records
-* Achievement Categories
-* Achievement Levels
-* Achievement Documentation
-
-### Dashboard & Analytics
-
-* Student Statistics
-* Academic Achievement Statistics
-* Non-Academic Achievement Statistics
-* Achievement Monitoring Charts
-
-### Reporting
-
-* Student Achievement Reports
-* PDF Export
-* Performance Monitoring Reports
-
----
-
-## System Users
+## User Roles
 
 ### Administrator
 
-* Manage all system data
-* Manage users and permissions
-* Manage student achievements
-* Access reports and analytics
+* Manage students
+* Manage teachers
+* Manage parents
+* Manage classes
+* Manage subjects
+* Manage academic years
+* Manage academic achievements
+* Manage non-academic achievements
+* Access reports and statistics
 
 ### Teacher
 
-* Input student achievement data
-* View achievement reports
-* Monitor student progress
+* Monitor student achievements
+* View reports
+* Access student performance information
 
 ### Parent
 
@@ -96,12 +54,128 @@ The application provides integrated management of students, teachers, parents, a
 
 ---
 
+## Key Features
+
+### Authentication & Authorization
+
+* Secure Login System
+* Session Management
+* Role-Based Access Control
+
+### Dashboard
+
+* Total Students
+* Total Teachers
+* Total Classes
+* Academic Achievement Statistics
+* Non-Academic Achievement Statistics
+* Achievement Monitoring Charts
+
+### Master Data Management
+
+* Student Management (CRUD)
+* Teacher Management (CRUD)
+* Parent Management (CRUD)
+* Class Management (CRUD)
+* Subject Management (CRUD)
+* Academic Year Management (CRUD)
+
+### Academic Achievement Module
+
+* Academic Score Entry
+* Subject-Based Assessment
+* Semester-Based Records
+* Academic Performance Monitoring
+* Class-Based Student Selection Workflow
+
+### Non-Academic Achievement Module
+
+* Competition Achievement Records
+* Achievement Categories
+* Achievement Levels
+* Achievement Documentation
+
+### Reporting Module
+
+* Student Achievement Reports
+* Academic Reports
+* Non-Academic Reports
+* PDF Export
+
+---
+
+## Implemented Modules
+
+✅ Dashboard
+
+✅ Student Management
+
+✅ Teacher Management
+
+✅ Parent Management
+
+✅ Class Management
+
+✅ Subject Management
+
+✅ Academic Year Management
+
+✅ Academic Achievement Management
+
+✅ Non-Academic Achievement Management
+
+✅ PDF Report Generation
+
+✅ Statistical Reports
+
+---
+
+## System Workflow
+
+### Student Management
+
+Dashboard
+
+→ Classes
+
+→ Select Class
+
+→ View Students
+
+→ Add / Edit / Delete Students
+
+### Academic Achievement Input
+
+Dashboard
+
+→ Academic Achievement
+
+→ Select Class
+
+→ Select Student
+
+→ Input Scores
+
+→ Save Academic Records
+
+### Reporting
+
+Dashboard
+
+→ Achievement Reports
+
+→ Select Student
+
+→ Generate PDF Report
+
+---
+
 ## Technology Stack
 
 ### Backend
 
 * PHP 8+
-* Laravel 12
+* Laravel 13
 
 ### Frontend
 
@@ -122,65 +196,51 @@ The application provides integrated management of students, teachers, parents, a
 
 ---
 
-## Implemented Modules
-
-* Dashboard
-* User Management
-* Teacher Management
-* Parent Management
-* Student Management
-* Class Management
-* Subject Management
-* Academic Year Management
-* Academic Achievement Management
-* Non-Academic Achievement Management
-* Statistical Reports
-* PDF Report Generation
-
----
-
 ## Installation
 
-Clone the repository:
+### Clone Repository
 
 ```bash
 git clone https://github.com/iqbalm6/monitoring-prestasi.git
 ```
 
-Navigate to the project directory:
+### Enter Project Directory
 
 ```bash
 cd monitoring-prestasi
 ```
 
-Install dependencies:
+### Install Dependencies
 
 ```bash
 composer install
+
 npm install
 ```
 
-Copy the environment file:
+### Configure Environment
 
 ```bash
 cp .env.example .env
 ```
 
-Generate application key:
+### Generate Application Key
 
 ```bash
 php artisan key:generate
 ```
 
-Configure your database settings in the `.env` file.
+### Configure Database
 
-Run migrations and seeders:
+Edit the `.env` file and set your MySQL database credentials.
+
+### Run Migration and Seeder
 
 ```bash
 php artisan migrate --seed
 ```
 
-Start the development server:
+### Run Development Server
 
 ```bash
 php artisan serve
@@ -210,50 +270,43 @@ routes/
 
 ---
 
-## Development History
+## Current Version
 
-### v0.5-master-data-akademik
+### v1.0.0-beta
 
+Features included:
+
+* Dashboard Statistics
+* Class Management
 * Student Management
 * Teacher Management
 * Parent Management
-* Class Management
 * Subject Management
 * Academic Year Management
 * Academic Achievement Module
-
-### v0.6-dashboard-statistik
-
-* Dashboard Statistics
 * Non-Academic Achievement Module
-* Achievement Analytics
-
-### Current Version
-
-* Teacher Dashboard
-* Student Achievement Reports
-* PDF Export Feature
-* Achievement Statistics Charts
+* PDF Reporting
+* Class-Based Navigation Workflow
 
 ---
 
 ## Future Enhancements
 
 * Mobile Application Integration
-* Achievement Recommendation System
-* Decision Support Features
-* Notification System
 * Achievement Ranking System
-* Parent Mobile Access
+* Decision Support System (DSS)
+* Notification System
+* Parent Portal Improvements
+* Student Performance Recommendation System
 
 ---
 
 ## Author
 
-**IQBAL MULYANA**
+**Iqbal Mulyana**
 
 ---
 
 ## License
 
-This project was developed for academic and research purposes.
+This project was developed for academic research and educational purposes.

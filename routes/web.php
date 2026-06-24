@@ -29,6 +29,12 @@ Route::middleware(['auth'])
     ->parameters([
         'kelas' => 'kelas'
     ]);
+
+Route::middleware(['auth'])
+    ->get('/kelas/{kelas}/siswa',
+    [KelasController::class,'siswa']
+    )->name('kelas.siswa');
+
 Route::middleware(['auth'])
     ->get('/dashboard',[DashboardController::class,'index'])
     ->name('dashboard');
@@ -43,6 +49,13 @@ Route::middleware(['auth'])
     ->resource('siswa', SiswaController::class);
 
 Route::middleware(['auth'])
+    ->get(
+        '/siswa/kelas/{kelas}',
+        [SiswaController::class, 'kelas']
+    )
+    ->name('siswa.kelas');
+
+Route::middleware(['auth'])
     ->resource('tahun-ajaran', TahunAjaranController::class);
 
 Route::middleware(['auth'])
@@ -54,6 +67,20 @@ Route::middleware(['auth'])
 
 Route::middleware(['auth'])
     ->resource('prestasi-akademik', PrestasiAkademikController::class);
+
+Route::middleware(['auth'])
+    ->get(
+        '/prestasi-akademik/pilih-kelas',
+        [PrestasiAkademikController::class, 'pilihKelas']
+    )
+    ->name('prestasi-akademik.pilih-kelas');
+
+Route::middleware(['auth'])
+    ->get(
+        '/prestasi-akademik/kelas/{kelas}',
+        [PrestasiAkademikController::class, 'pilihSiswa']
+    )
+    ->name('prestasi-akademik.pilih-siswa');
 
 Route::middleware(['auth'])
     ->resource('prestasi-non-akademik', PrestasiNonAkademikController::class);
@@ -85,4 +112,11 @@ Route::post('/keluar', function () {
     return redirect()->route('logout.success');
 
 })->middleware('auth');
+
+Route::middleware(['auth'])
+    ->get(
+        '/siswa/kelas/{kelas}',
+        [SiswaController::class, 'kelas']
+    )
+    ->name('siswa.kelas');
 require __DIR__.'/auth.php';

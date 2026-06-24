@@ -65,9 +65,9 @@
 
                     </option>
 
-                    <option value="AG">
+                    <option value="AGAMA">
 
-                        AG
+                        AGAMA
 
                     </option>
 

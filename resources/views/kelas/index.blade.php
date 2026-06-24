@@ -56,13 +56,12 @@
                 <thead class="table-success">
 
                     <tr>
-
                         <th width="80">No</th>
                         <th>Nama Kelas</th>
                         <th>Jurusan</th>
                         <th>Wali Kelas</th>
+                        <th width="140">Siswa</th>
                         <th width="180">Aksi</th>
-
                     </tr>
 
                 </thead>
@@ -73,52 +72,51 @@
 
                     <tr>
 
-                        <td>
-                            {{ $loop->iteration }}
-                        </td>
+    <td>{{ $loop->iteration }}</td>
 
-                        <td>
-                            {{ $item->nama_kelas }}
-                        </td>
+    <td>{{ $item->nama_kelas }}</td>
 
-                        <td>
-                            {{ $item->jurusan }}
-                        </td>
+    <td>{{ $item->jurusan }}</td>
 
-                        <td>
-                            {{ $item->waliKelas->name ?? '-' }}
-                        </td>
+    <td>{{ $item->waliKelas->name ?? '-' }}</td>
 
-                        <td>
+    <td>
+        <a
+            href="{{ route('kelas.siswa',$item->id) }}"
+            class="btn btn-info btn-sm"
+        >
+            Lihat Siswa
+        </a>
+    </td>
 
-                            <a href="{{ route('kelas.edit',$item->id) }}"
-                               class="btn btn-warning btn-sm">
+    <td>
 
-                                Edit
+        <a
+            href="{{ route('kelas.edit',$item->id) }}"
+            class="btn btn-warning btn-sm"
+        >
+            Edit
+        </a>
 
-                            </a>
+        <form
+            action="{{ route('kelas.destroy',$item->id) }}"
+            method="POST"
+            class="d-inline"
+        >
+            @csrf
+            @method('DELETE')
 
-                            <form
-                                action="{{ route('kelas.destroy',$item->id) }}"
-                                method="POST"
-                                class="d-inline"
-                            >
+            <button
+                class="btn btn-danger btn-sm"
+                onclick="return confirm('Yakin ingin menghapus data ini?')"
+            >
+                Hapus
+            </button>
+        </form>
 
-                                @csrf
-                                @method('DELETE')
+    </td>
 
-                                <button
-                                    class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Yakin ingin menghapus data ini?')"
-                                >
-
-                                    Hapus
-
-                                </button>
-
-                            </form>
-
-                        </td>
+</tr>
 
                     </tr>
 
@@ -134,6 +132,7 @@
 
                     </tr>
 
+                    
                     @endforelse
 
                 </tbody>

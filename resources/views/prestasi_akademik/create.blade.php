@@ -11,24 +11,22 @@
 
     <div class="mb-3">
 
-        <label>Siswa</label>
+    <label>Siswa</label>
 
-        <select name="siswa_id"
-                class="form-control">
+    <input
+        type="text"
+        class="form-control"
+        value="{{ $siswaDipilih->nama ?? '' }}"
+        readonly
+    >
 
-            @foreach($siswaList as $item)
+    <input
+        type="hidden"
+        name="siswa_id"
+        value="{{ $siswaDipilih->id ?? '' }}"
+    >
 
-                <option value="{{ $item->id }}">
-
-                    {{ $item->nama }}
-
-                </option>
-
-            @endforeach
-
-        </select>
-
-    </div>
+</div>
 
     <div class="mb-3">
 

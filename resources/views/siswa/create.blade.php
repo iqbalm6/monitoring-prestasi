@@ -66,7 +66,10 @@
 
 @foreach($kelas as $item)
 
-<option value="{{ $item->id }}">
+<option
+    value="{{ $item->id }}"
+    {{ ($kelasDipilih ?? '') == $item->id ? 'selected' : '' }}
+>
     {{ $item->nama_kelas }}
 </option>
 

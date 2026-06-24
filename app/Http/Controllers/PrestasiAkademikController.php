@@ -7,64 +7,94 @@ use App\Models\PrestasiAkademik;
 use App\Models\Siswa;
 use App\Models\MataPelajaran;
 use App\Models\TahunAjaran;
+use App\Models\Kelas;
 
 class PrestasiAkademikController extends Controller
 {
 
     public function index()
     {
-        $data= PrestasiAkademik::with([
-            'siswa',
-            'mataPelajaran',
-            'tahunAjaran'
-        ])->get();
+    $kelas = Kelas::withCount('siswa')
+        ->orderBy('nama_kelas')
+        ->get();
 
-        return view('prestasi_akademik.index',
-        compact('data'));
+    return view(
+        'prestasi_akademik.index',
+        compact('kelas')
+    );
     }
 
-    
-    public function create()
+    public function pilihKelas()
     {
+        $kelas = Kelas::withCount('siswa')
+            ->orderBy('nama_kelas')
+            ->get();
+
         return view(
-            'prestasi_akademik.create',
-            [
-                'siswaList'   => Siswa::all(),
-                'tahunAjaran' => TahunAjaran::all()
-            ]
+            'prestasi_akademik.pilih_kelas',
+            compact('kelas')
         );
     }
 
-   public function tampilkanMapel(Request $request)
+    public function pilihSiswa(Kelas $kelas)
     {
-    $siswa = Siswa::with('kelas')
-        ->findOrFail($request->siswa_id);
+        $siswa = Siswa::where(
+            'kelas_id',
+            $kelas->id
+        )->get();
 
-    $jurusan = $siswa->kelas->jurusan;
+        return view(
+            'prestasi_akademik.pilih_siswa',
+            compact(
+                'kelas',
+                'siswa'
+            )
+        );
+    }
 
-    $mataPelajaran = MataPelajaran::where(
-        'jurusan',
-        $jurusan
-    )->orderBy('nama_mapel')
-     ->get();
-
-    $tahunAjaran = TahunAjaran::all();
+    public function create(Request $request)
+{
+    $siswaDipilih = Siswa::with('kelas')
+        ->findOrFail($request->siswa);
 
     return view(
         'prestasi_akademik.create',
         [
-            'siswaList'     => Siswa::all(),
-            'tahunAjaran'   => $tahunAjaran,
-            'mataPelajaran' => $mataPelajaran,
-            'siswaDipilih'  => $siswa,
-            'semester'      => $request->semester,
-            'tahunDipilih'  => $request->tahun_ajaran_id
+            'siswaDipilih' => $siswaDipilih,
+            'tahunAjaran'  => TahunAjaran::all()
         ]
     );
+}
+
+    public function tampilkanMapel(Request $request)
+    {
+        $siswa = Siswa::with('kelas')
+            ->findOrFail($request->siswa_id);
+
+        $jurusan = $siswa->kelas->jurusan;
+
+        $mataPelajaran = MataPelajaran::where(
+            'jurusan',
+            $jurusan
+        )->orderBy('nama_mapel')
+            ->get();
+
+        $tahunAjaran = TahunAjaran::all();
+
+                return view(
+            'prestasi_akademik.create',
+            [
+                'tahunAjaran'   => $tahunAjaran,
+                'mataPelajaran' => $mataPelajaran,
+                'siswaDipilih'  => $siswa,
+                'semester'      => $request->semester,
+                'tahunDipilih'  => $request->tahun_ajaran_id
+            ]
+        );
     } 
 
     public function store(Request $request)
-{
+    {
     $request->validate([
         'siswa_id' => 'required',
         'tahun_ajaran_id' => 'required',
@@ -97,7 +127,7 @@ class PrestasiAkademikController extends Controller
     
     public function show(string $id)
     {
-        //
+        
     }
 
     

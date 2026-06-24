@@ -8,15 +8,17 @@ use App\Models\User;
 
 class KelasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
-    {
-        $kelas = Kelas::latest()->get();
+{
+    $kelas = Kelas::orderBy('jurusan')
+        ->orderBy('nama_kelas')
+        ->get();
 
-        return view('kelas.index', compact('kelas'));
-    }
+    return view(
+        'kelas.index',
+        compact('kelas')
+    );
+}
 
 
     public function create()
@@ -52,8 +54,18 @@ class KelasController extends Controller
     
     public function edit(Kelas $kelas)
 {
-    $guru = User::where('role', 'guru')->get();
-    return view('kelas.edit', compact('kelas'));
+    $guru = User::where(
+        'role',
+        'guru'
+    )->get();
+
+    return view(
+        'kelas.edit',
+        compact(
+            'kelas',
+            'guru'
+        )
+    );
 }
 
     
@@ -64,17 +76,20 @@ class KelasController extends Controller
     ]);
 
     $kelas->update([
-        'nama_kelas' => $request->nama_kelas
+        'nama_kelas'    => $request->nama_kelas,
+        'jurusan'       => $request->jurusan,
+        'wali_kelas_id' => $request->wali_kelas_id
     ]);
 
     return redirect()
         ->route('kelas.index')
-        ->with('success','Data berhasil diupdate');
+        ->with(
+            'success',
+            'Data berhasil diupdate'
+        );
 }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(Kelas $kelas)
 {
     $kelas->delete();
@@ -83,4 +98,21 @@ class KelasController extends Controller
         ->route('kelas.index')
         ->with('success','Data berhasil dihapus');
 }
+
+public function siswa(Kelas $kelas)
+{
+    $siswa = \App\Models\Siswa::where(
+        'kelas_id',
+        $kelas->id
+    )->get();
+
+    return view(
+        'kelas.siswa',
+        compact(
+            'kelas',
+            'siswa'
+        )
+    );
+}
+
 }

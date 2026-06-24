@@ -2,58 +2,100 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between mb-3">
+<div class="card shadow-sm border-0">
 
-    <h2>Data Siswa</h2>
+<div class="card-header bg-white">
 
-    <a href="{{ route('siswa.create') }}"
-       class="btn btn-primary">
-
-        Tambah Siswa
-
-    </a>
+    <h4 class="mb-0 fw-bold text-success">
+        Daftar Kelas
+    </h4>
 
 </div>
 
-<table class="table table-bordered">
+<div class="card-body">
 
-<thead>
+    <div class="table-responsive">
 
-<tr>
+        <table class="table table-hover">
 
-    <th>NIS</th>
-    <th>Nama</th>
-    <th>Kelas</th>
-    <th>Orang Tua</th>
+            <thead class="table-light">
 
-</tr>
+                <tr>
 
-</thead>
+                    <th>No</th>
 
-<tbody>
+                    <th>Nama Kelas</th>
 
-@foreach($siswa as $item)
+                    <th>Jurusan</th>
 
-<tr>
+                    <th>Jumlah Siswa</th>
 
-    <td>{{ $item->nis }}</td>
+                    <th width="150">
+                        Aksi
+                    </th>
 
-    <td>{{ $item->nama }}</td>
+                </tr>
 
-    <td>
-        {{ $item->kelas->nama_kelas ?? '-' }}
-    </td>
+            </thead>
 
-    <td>
-        {{ $item->orangTua->name ?? '-' }}
-    </td>
+            <tbody>
 
-</tr>
+                @forelse($kelas as $item)
 
-@endforeach
+                <tr>
 
-</tbody>
+                    <td>
+                        {{ $loop->iteration }}
+                    </td>
 
-</table>
+                    <td>
+                        {{ $item->nama_kelas }}
+                    </td>
+
+                    <td>
+                        {{ $item->jurusan }}
+                    </td>
+
+                    <td>
+                        {{ $item->siswa_count }}
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{{ route('siswa.kelas',$item->id) }}"
+                            class="btn btn-success btn-sm"
+                        >
+                            Lihat Siswa
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                @empty
+
+                <tr>
+
+                    <td colspan="5"
+                        class="text-center">
+
+                        Belum ada data kelas
+
+                    </td>
+
+                </tr>
+
+                @endforelse
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</div>
 
 @endsection
