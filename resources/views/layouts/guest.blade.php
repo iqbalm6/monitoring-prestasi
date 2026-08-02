@@ -576,12 +576,9 @@
     </div>
 
     <div class="footer">
-
-        © {{ date('Y') }}
-        MA Ruhul Islam Anak Bangsa.
-        All Rights Reserved.
-
-    </div>
+    © {{ date('Y') }} MA Ruhul Islam Anak Bangsa. All Rights Reserved.<br>
+    Designed & Developed by <strong>IIqbalM</strong>
+</div>
 
 </body>
 
