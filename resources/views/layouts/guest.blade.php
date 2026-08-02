@@ -474,6 +474,18 @@
             }
         }
 
+                .footer a{
+            color:#FFD54F;
+            text-decoration:none;
+            font-weight:700;
+            transition:all .3s ease;
+        }
+
+        .footer a:hover{
+            color:#FFE082;
+            text-shadow:0 0 8px rgba(255,213,79,.5);
+        }
+
     </style>
 
 </head>
@@ -576,9 +588,12 @@
     </div>
 
     <div class="footer">
-    © {{ date('Y') }} MA Ruhul Islam Anak Bangsa. All Rights Reserved.<br>
-    Designed & Developed by <strong>IIqbalM</strong>
-</div>
+        © {{ date('Y') }} MA Ruhul Islam Anak Bangsa. All Rights Reserved.<br>
+        Designed & Developed by
+        <a href="https://instagram.com/iqbaalm6" target="_blank">
+            <strong>Iqbal Mulyana</strong>
+        </a>
+    </div>
 
 </body>
 
