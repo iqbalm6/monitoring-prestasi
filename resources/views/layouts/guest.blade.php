@@ -30,13 +30,44 @@
         .header{
             background:F5F5F5;
             border-bottom:4px solid #4A4A4A;
-            padding:20px 40px;
+            padding:18px 30px;
         }
 
         .header-content{
             display:flex;
             align-items:center;
             gap:20px;
+        }
+
+        @media(max-width:768px){
+
+            .header{
+
+                padding:15px;
+
+            }
+
+            .header-content{
+
+                flex-direction:column;
+                text-align:center;
+            }
+
+            .logo{
+
+                width:75px;
+            }
+
+            .school-text h2{
+
+                font-size:22px;
+            }
+
+            .school-text p{
+
+                font-size:15px;
+            }
+
         }
 
         .logo{
@@ -61,7 +92,16 @@
 
         .main-content{
             min-height:75vh;
-            padding:60px 80px;
+            padding:50px 30px;
+        }
+                @media(max-width:768px){
+
+        .main-content{
+
+            padding:20px 15px;
+
+        }
+
         }
 
         .hero-box{
@@ -152,10 +192,18 @@
         }
         
         .footer{
+            font-size:14px;
             background: #1a5a01;
             color:white;
             text-align:center;
             padding:15px;
+        }
+
+        @media(max-width:768px){
+            .footer{
+                padding:18px;
+                font-size:13px;
+            }
         }
 
         @media(max-width:992px){
@@ -178,6 +226,50 @@
                 width:100%;
                 max-width:450px;
             }
+        }
+
+                @media(max-width:768px){
+
+        .hero-box{
+
+            padding:30px;
+            border-left:6px solid #2E6B1F;
+
+        }
+
+        .hero-box h1{
+
+            font-size:34px;
+            text-align:center;
+
+        }
+
+        .hero-desc{
+
+            font-size:16px;
+            text-align:center;
+            margin-bottom:25px;
+
+        }
+
+        .feature-item{
+
+            font-size:18px;
+            margin-bottom:15px;
+
+        }
+
+        }
+
+                @media(max-width:768px){
+
+        .login-card{
+
+            width:100%;
+            padding:30px 25px;
+
+        }
+
         }
 
         a{
@@ -231,7 +323,7 @@
 
         <div class="row align-items-center g-5">
 
-            <div class="col-lg-8">
+            <div class="col-lg-8 order-2 order-lg-1">
 
                 <div class="hero-box">
 
@@ -268,7 +360,7 @@
 
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-4 order-1 order-lg-2">
 
                 <div class="login-card">
 

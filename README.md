@@ -4,7 +4,7 @@
 
 The Student Achievement Monitoring Information System is a web-based application designed to assist schools in managing, monitoring, and evaluating student achievements in both academic and non-academic fields.
 
-The system was developed as part of a bachelor's thesis project at STIMIK AMIKI and implemented using the Laravel Framework.
+The system was developed as part of a bachelor's thesis project at STIMIK INDONESIA and implemented using the Laravel Framework.
 
 It provides centralized management for students, teachers, parents, classes, subjects, academic records, non-academic achievements, reports, and performance monitoring dashboards.
 
