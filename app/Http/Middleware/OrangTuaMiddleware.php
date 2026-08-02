@@ -14,9 +14,12 @@ class OrangTuaMiddleware
      * @param  Closure(Request): (Response)  $next
      */
     public function handle($request, Closure $next)
-    {   
-    if(auth()->user()->role !== 'orang_tua')
     {
+    if (!auth()->check()) {
+        abort(403);
+    }
+
+    if (auth()->user()->role !== 'orang_tua') {
         abort(403);
     }
 

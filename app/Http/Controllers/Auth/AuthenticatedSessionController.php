@@ -11,22 +11,41 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
+    /**
+     * Menampilkan halaman login.
+     */
     public function create(): View
     {
         return view('auth.login');
     }
 
- 
+    /**
+     * Proses autentikasi dan redirect berdasarkan role.
+     */
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = Auth::user();
+
+        return match ($user->role) {
+
+            'admin' => redirect()->route('dashboard'),
+
+            'guru' => redirect()->route('guru.dashboard'),
+
+            'orang_tua' => redirect()->route('orang-tua.dashboard'),
+
+            default => abort(403, 'Role tidak dikenali.'),
+
+        };
     }
 
- 
+    /**
+     * Logout user.
+     */
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();

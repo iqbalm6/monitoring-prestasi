@@ -15,11 +15,14 @@ class GuruMiddleware
      */
     public function handle($request, Closure $next)
 {
-    if(auth()->user()->role !== 'guru')
-    {
+    if (!auth()->check()) {
+        abort(403);
+    }
+
+    if (auth()->user()->role !== 'guru') {
         abort(403);
     }
 
     return $next($request);
-    }
+}
 }

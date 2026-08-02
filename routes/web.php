@@ -1,104 +1,227 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\KelasController;
+
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Guru\DashboardController as GuruDashboardController;
+use App\Http\Controllers\OrangTua\DashboardController as OrangTuaDashboardController;
 use App\Http\Controllers\GuruController;
-use App\Http\Controllers\OrangTuaController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\OrangTuaController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\PrestasiAkademikController;
 use App\Http\Controllers\PrestasiNonAkademikController;
 use App\Http\Controllers\LaporanPrestasiController;
-use Illuminate\Support\Facades\Auth;
+
+/*
+|--------------------------------------------------------------------------
+| Public Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/', function () {
     return redirect('/login');
 });
 
+/*
+|--------------------------------------------------------------------------
+| Profile
+|--------------------------------------------------------------------------
+*/
+
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/profile', [
+        ProfileController::class,
+        'edit'
+    ])->name('profile.edit');
+
+    Route::patch('/profile', [
+        ProfileController::class,
+        'update'
+    ])->name('profile.update');
+
+    Route::delete('/profile', [
+        ProfileController::class,
+        'destroy'
+    ])->name('profile.destroy');
+
 });
 
-Route::middleware(['auth'])
-    ->resource('kelas', KelasController::class)
-    ->parameters([
+/*
+|--------------------------------------------------------------------------
+| Administrator Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware([
+    'auth',
+    'admin'
+])->group(function () {
+
+    /*
+    |------------------------------------------------------
+    | Dashboard
+    |------------------------------------------------------
+    */
+
+    Route::get(
+        '/dashboard',
+        [AdminDashboardController::class, 'index']
+    )->name('dashboard');
+
+    /*
+    |------------------------------------------------------
+    | Kelas
+    |------------------------------------------------------
+    */
+
+    Route::resource(
+        'kelas',
+        KelasController::class
+    )->parameters([
         'kelas' => 'kelas'
     ]);
 
-Route::middleware(['auth'])
-    ->get('/kelas/{kelas}/siswa',
-    [KelasController::class,'siswa']
+    Route::get(
+        '/kelas/{kelas}/siswa',
+        [KelasController::class, 'siswa']
     )->name('kelas.siswa');
 
-Route::middleware(['auth'])
-    ->get('/dashboard',[DashboardController::class,'index'])
-    ->name('dashboard');
+    /*
+    |------------------------------------------------------
+    | Guru
+    |------------------------------------------------------
+    */
 
-Route::middleware(['auth'])
-    ->resource('guru', GuruController::class);
+    Route::resource(
+        'guru',
+        GuruController::class
+    );
 
-Route::middleware(['auth'])
-    ->resource('orang-tua', OrangTuaController::class);
+    /*
+    |------------------------------------------------------
+    | Orang Tua
+    |------------------------------------------------------
+    */
 
-Route::middleware(['auth'])
-    ->resource('siswa', SiswaController::class);
+    Route::resource(
+        'orang-tua',
+        OrangTuaController::class
+    );
 
-Route::middleware(['auth'])
-    ->get(
+    /*
+    |------------------------------------------------------
+    | Siswa
+    |------------------------------------------------------
+    */
+
+    Route::resource(
+        'siswa',
+        SiswaController::class
+    );
+
+    Route::get(
         '/siswa/kelas/{kelas}',
         [SiswaController::class, 'kelas']
-    )
-    ->name('siswa.kelas');
+    )->name('siswa.kelas');
 
-Route::middleware(['auth'])
-    ->resource('tahun-ajaran', TahunAjaranController::class);
+    /*
+    |------------------------------------------------------
+    | Tahun Ajaran
+    |------------------------------------------------------
+    */
 
-Route::middleware(['auth'])
-    ->resource('mata-pelajaran', MataPelajaranController::class);
+    Route::resource(
+        'tahun-ajaran',
+        TahunAjaranController::class
+    );
 
-Route::middleware(['auth'])
-    ->post('/prestasi-akademik/tampilkan-mapel',[PrestasiAkademikController::class,'tampilkanMapel'])
-    ->name('prestasi-akademik.tampilkan-mapel');
+    /*
+    |------------------------------------------------------
+    | Mata Pelajaran
+    |------------------------------------------------------
+    */
 
-Route::middleware(['auth'])
-    ->resource('prestasi-akademik', PrestasiAkademikController::class);
+    Route::resource(
+        'mata-pelajaran',
+        MataPelajaranController::class
+    );
 
-Route::middleware(['auth'])
-    ->get(
+    /*
+    |------------------------------------------------------
+    | Prestasi Akademik
+    |------------------------------------------------------
+    */
+
+    Route::post(
+        '/prestasi-akademik/tampilkan-mapel',
+        [PrestasiAkademikController::class, 'tampilkanMapel']
+    )->name('prestasi-akademik.tampilkan-mapel');
+
+    Route::get(
         '/prestasi-akademik/pilih-kelas',
         [PrestasiAkademikController::class, 'pilihKelas']
-    )
-    ->name('prestasi-akademik.pilih-kelas');
+    )->name('prestasi-akademik.pilih-kelas');
 
-Route::middleware(['auth'])
-    ->get(
+    Route::get(
         '/prestasi-akademik/kelas/{kelas}',
         [PrestasiAkademikController::class, 'pilihSiswa']
-    )
-    ->name('prestasi-akademik.pilih-siswa');
+    )->name('prestasi-akademik.pilih-siswa');
 
-Route::middleware(['auth'])
-    ->resource('prestasi-non-akademik', PrestasiNonAkademikController::class);
+    Route::resource(
+        'prestasi-akademik',
+        PrestasiAkademikController::class
+    );
 
-Route::middleware(['auth'])
-    ->get('/laporan-prestasi',[LaporanPrestasiController::class,'index'])
-    ->name('laporan-prestasi.index');
+    /*
+    |------------------------------------------------------
+    | Prestasi Non Akademik
+    |------------------------------------------------------
+    */
 
-Route::middleware(['auth'])
-    ->post('/laporan-prestasi',[LaporanPrestasiController::class,'tampilkan'])
-    ->name('laporan-prestasi.tampilkan');
+    Route::resource(
+        'prestasi-non-akademik',
+        PrestasiNonAkademikController::class
+    );
 
-Route::middleware(['auth'])
-    ->get('/laporan-prestasi/pdf/{siswa}/{tahun}',[LaporanPrestasiController::class,'pdf'])
-    ->name('laporan-prestasi.pdf');
+    /*
+    |------------------------------------------------------
+    | Laporan Prestasi
+    |------------------------------------------------------
+    */
+
+    Route::get(
+        '/laporan-prestasi',
+        [LaporanPrestasiController::class, 'index']
+    )->name('laporan-prestasi.index');
+
+    Route::post(
+        '/laporan-prestasi',
+        [LaporanPrestasiController::class, 'tampilkan']
+    )->name('laporan-prestasi.tampilkan');
+
+    Route::get(
+        '/laporan-prestasi/pdf/{siswa}/{tahun}',
+        [LaporanPrestasiController::class, 'pdf']
+    )->name('laporan-prestasi.pdf');
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| Logout
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/logout-success', function () {
+
     return view('auth.logout');
+
 })->name('logout.success');
 
 Route::post('/keluar', function () {
@@ -113,10 +236,10 @@ Route::post('/keluar', function () {
 
 })->middleware('auth');
 
-Route::middleware(['auth'])
-    ->get(
-        '/siswa/kelas/{kelas}',
-        [SiswaController::class, 'kelas']
-    )
-    ->name('siswa.kelas');
+/*
+|--------------------------------------------------------------------------
+| Authentication Routes
+|--------------------------------------------------------------------------
+*/
+
 require __DIR__.'/auth.php';

@@ -9,18 +9,15 @@ return new class extends Migration
     
     public function up(): void
 {
-    Schema::table('mata_pelajaran', function (Blueprint $table) {
-        $table->enum('jurusan', [
-            'IPA',
-            'AGAMA'
-        ])->after('nama_mapel');
+    Schema::create('mata_pelajaran', function (Blueprint $table) {
+        $table->id();
+        $table->string('nama_mapel');
+        $table->timestamps();
     });
 }
 
 public function down(): void
 {
-    Schema::table('mata_pelajaran', function (Blueprint $table) {
-        $table->dropColumn('jurusan');
-    });
+    Schema::dropIfExists('mata_pelajaran');
 }
 };
